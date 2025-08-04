@@ -1,6 +1,9 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addEmployee } from '../store/employeesSlice'
 
 function CreateEmployee() {
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -20,9 +23,7 @@ function CreateEmployee() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const employees = JSON.parse(localStorage.getItem('employees')) || []
-    employees.push(formData)
-    localStorage.setItem('employees', JSON.stringify(employees))
+    dispatch(addEmployee(formData))
     alert('Employee Created!')
   }
 
