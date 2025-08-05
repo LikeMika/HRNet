@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../store/employeesSlice'
+import { Link } from 'react-router-dom'
+
 
 function CreateEmployee() {
   const dispatch = useDispatch()
@@ -30,6 +32,10 @@ function CreateEmployee() {
   return (
     <main className="container">
       <h1>HRNet</h1>
+      <Link to="/employee-list" style={{ marginBottom: '1rem', display: 'inline-block' }}>
+  View Current Employees
+      </Link>
+
       <h2>Create Employee</h2>
       <form onSubmit={handleSubmit}>
         <label>First Name</label>
