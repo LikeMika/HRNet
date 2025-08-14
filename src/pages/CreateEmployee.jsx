@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../store/employeesSlice'
 import { Link } from 'react-router-dom'
-
+import states from '../data/states' 
 
 function CreateEmployee() {
   const dispatch = useDispatch()
@@ -60,7 +60,14 @@ function CreateEmployee() {
           <input type="text" name="city" value={formData.city} onChange={handleChange} />
 
           <label>State</label>
-          <input type="text" name="state" value={formData.state} onChange={handleChange} />
+          <select name="state" value={formData.state} onChange={handleChange}>
+            <option value="">-- Select a State --</option>
+            {states.map((state) => (
+              <option key={state.abbreviation} value={state.abbreviation}>
+                {state.name}
+              </option>
+            ))}
+          </select>
 
           <label>Zip Code</label>
           <input type="number" name="zipCode" value={formData.zipCode} onChange={handleChange} />
