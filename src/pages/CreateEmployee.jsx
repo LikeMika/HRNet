@@ -2,9 +2,12 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addEmployee } from '../store/employeesSlice'
 import { Link } from 'react-router-dom'
-import states from '../data/states' 
+import states from '../data/states'
+import Modal from 'react-modal-hrnet-oc'
+import 'react-modal-hrnet-oc/style.css'
 
 function CreateEmployee() {
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     firstName: '',
@@ -26,7 +29,7 @@ function CreateEmployee() {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(addEmployee(formData))
-    alert('Employee Created!')
+    setOpen(true)
   }
 
   return (
@@ -85,6 +88,15 @@ function CreateEmployee() {
 
         <button type="submit">Save</button>
       </form>
+      <Modal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        title="Employee Created"
+        size="sm"
+        footer={<button onClick={() => setOpen(false)}>Close</button>}
+      >
+        <p>The employee has been created successfully.</p>
+      </Modal>
     </main>
   )
 }
